@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "1f5a4ecb-8d53-47e1-aa5a-6c8f718c04e6",
+		"name": "students-record-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "37180011"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5000/api/v1/students",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5000/api/v1/students",
+				"description": "### Get Students\n\nThis endpoint retrieves a list of students.\n\n#### Request Body\n\nThis request does not require a request body.\n\n#### Response\n\n- `students`: An array of student objects containing information such as name, age, and grade."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/v1/students/<id>",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5000/api/v1/students/<id>"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/v1/students",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"matriculation_number\": \"123456\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5000/api/v1/students"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/v1/students/<id>",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"matriculation_number\": \"123456\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5000/api/v1/students/<id>"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/v1/students/<id>",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:5000/api/v1/students/<id>"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/healthcheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5000/healthcheck"
+			},
+			"response": []
+		}
+	]
+}
