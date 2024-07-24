@@ -21,7 +21,7 @@ def add_student():
     data = request.get_json()
     new_student = Student(
         name=data['name'],
-        matric_number=data['matriculation_number']
+        matric_number=data['matric_number']
     )
     db.session.add(new_student)
     db.session.commit()
@@ -37,7 +37,7 @@ def update_student(id):
     student = Student.query.get_or_404(id)
     data = request.get_json()
     student.name = data['name']
-    student.matric_number = data['matriculation_number']
+    student.matric_number = data['matric_number']
     db.session.commit()
     return jsonify({'message': 'Student record updated successfully'})
 
