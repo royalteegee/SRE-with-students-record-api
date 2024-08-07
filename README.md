@@ -1,5 +1,5 @@
 ## CRUD REST API  
-### It was created using Python Flash  
+### This task is for week one and the API was created using Python Flash  
 ### The API performs the following expectations
 - Add a new student.
 - Get all students.
