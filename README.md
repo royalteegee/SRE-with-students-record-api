@@ -21,7 +21,7 @@
 To build the Docker image, run:
 
 ```bash
-docker build -t your-repo/your-flask-api:1.0.0 .    
+docker build -t royalteegee/student-record-api:1.0 .    
 ```
 
 ## Run Docker Image
