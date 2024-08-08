@@ -1,4 +1,4 @@
-# Flask API and Postgres Container Setup
+# API and Postgres DB Container Setup
 ### This task is for week three and it is to set up both API and Postgres database containers with Docker Compose
 
 ## Expectations:
