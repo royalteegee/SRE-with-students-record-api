@@ -1,6 +1,4 @@
 #!/bin/bash
-
-# Ensure the script exits if a command fails
 set -e
 
 # Set the FLASK_APP environment variable to migration.py
@@ -11,7 +9,10 @@ if [ ! -d "migrations" ]; then
   flask db init
 fi
 
-# Create a migration script
+# Check if the database is in sync with the latest migration
+flask db stamp head
+
+# Create a migration script (if needed)
 flask db migrate -m "create student table"
 
 # Apply the migration
