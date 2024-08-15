@@ -17,7 +17,8 @@ jobs:
 
       - name: Bump version
         run: |
-          NEW_VERSION=$(semver bump patch $(git describe --tags --abbrev=0))
+          TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          NEW_VERSION=$(semver bump patch $TAG)
           git tag -a "$NEW_VERSION" -m "Automated tag"
           git push origin --tags
 
