@@ -27,8 +27,12 @@ jobs:
         run: |
           TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
           NEW_VERSION=$(semver bump patch $TAG)
+          echo "New version: $NEW_VERSION"
           git tag -a "$NEW_VERSION" -m "Automated tag"
           git push origin --tags
+
+      - name: Debug NEW_VERSION
+        run: echo "NEW_VERSION is $NEW_VERSION"
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -38,6 +42,10 @@ jobs:
 
       - name: Build and push image
         run: |
+          if [ -z "$NEW_VERSION" ]; then
+            echo "Error: NEW_VERSION is empty. Exiting."
+            exit 1
+          fi
           docker build -t student-record-api:$NEW_VERSION .
           docker tag student-record-api:$NEW_VERSION ${{ secrets.DOCKER_USERNAME }}/student-record-api:$NEW_VERSION
           docker push ${{ secrets.DOCKER_USERNAME }}/student-record-api:$NEW_VERSION
