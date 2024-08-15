@@ -27,6 +27,13 @@ jobs:
         run: |
           TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
           NEW_VERSION=$(semver bump patch $TAG)
+
+          # Ensure the new version is greater than the previous tag
+          if git rev-parse "refs/tags/$NEW_VERSION" >/dev/null 2>&1; then
+            echo "Tag $NEW_VERSION already exists. Incrementing..."
+            NEW_VERSION=$(semver bump patch $(echo $NEW_VERSION))
+          fi
+
           echo "New version: $NEW_VERSION"
           git tag -a "$NEW_VERSION" -m "Automated tag"
           git push origin --tags
