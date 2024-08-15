@@ -36,7 +36,7 @@ on:
       - week-4
 
 jobs:
-  Test:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -60,8 +60,8 @@ jobs:
         run: |
           pytest
 
-  docker:
-    needs: build
+  build-push:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
