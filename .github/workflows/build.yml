@@ -5,9 +5,6 @@ on:
     branches:
       - week-4
 
-permissions:
-  contents: write
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -24,7 +21,7 @@ jobs:
       - name: Build and push Docker image
         run: |
           IMAGE_NAME=student-record-api
-          IMAGE_TAG=1.0.0
+          IMAGE_TAG=1.0.1
           docker build -t $IMAGE_NAME:$IMAGE_TAG .
           docker tag $IMAGE_NAME:$IMAGE_TAG ${{ secrets.DOCKER_USERNAME }}/$IMAGE_NAME:$IMAGE_TAG
           docker push ${{ secrets.DOCKER_USERNAME }}/$IMAGE_NAME:$IMAGE_TAG
