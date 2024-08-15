@@ -25,14 +25,22 @@ jobs:
 
       - name: Bump version
         run: |
+          # Get the latest tag, default to v0.0.0 if no tags exist
           TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
-          NEW_VERSION=$(semver bump patch $TAG)
 
-          # Ensure the new version is greater than the previous tag
-          if git rev-parse "refs/tags/$NEW_VERSION" >/dev/null 2>&1; then
-            echo "Tag $NEW_VERSION already exists. Incrementing..."
-            NEW_VERSION=$(semver bump patch $(echo $NEW_VERSION))
+          # Increment the version
+          if [ "$TAG" = "v0.0.0" ]; then
+            # Start at v0.0.1 if we are at the very first tag
+            NEW_VERSION="v0.0.1"
+          else
+            NEW_VERSION=$(semver bump patch $TAG)
           fi
+
+          # Ensure the new version does not already exist
+          while git rev-parse "refs/tags/$NEW_VERSION" >/dev/null 2>&1; do
+            echo "Tag $NEW_VERSION already exists. Incrementing..."
+            NEW_VERSION=$(semver bump patch $NEW_VERSION)
+          done
 
           echo "New version: $NEW_VERSION"
           git tag -a "$NEW_VERSION" -m "Automated tag"
