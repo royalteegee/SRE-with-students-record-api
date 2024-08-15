@@ -1,0 +1,3 @@
+[flake8]
+max-line-length = 88  # Increase the allowed line length
+ignore = E302, E305  # Ignore specific errors
